@@ -4,8 +4,6 @@ The following is a program written in C# to interface with Unity 3D for visualis
 ## How it works
 The True Anomaly is calculated by first calculating the Mean Anomaly, and then using this to calculate the Eccentric Anomaly. The equation for Eccentric Anomaly is implicit and the Eccentric Anomaly term appears twice, thus it must be numerically calculated. In this case I used a basic Newton's method approach to calculate this. From here the True Anomaly is calculated, which is in turn used to calculate a state vector in the Perifocal frame of reference, and using a transformation matrix, this state vector is taken into the Geocentric Equatorial frame of reference. The J2 pertubation is taken into account to calculate the time varying longitude of ascending node and argument of periapsis with time.
 
-Basic Hohmann transfers have also been implemented, and given a final orbit, satellite mass and specific impulse of the satellite's fuel, will return the required delta V and expended mass.
-
 ## Where to find the code
 All code can be found within the Assets/Scripts folders.
 
