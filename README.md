@@ -24,7 +24,7 @@ Contains some basic rigidbody dynamics and all of the code for determining the o
 
 ## Future Additions
 I hope to add the following when I have spare time:
-- Orbital maneuvers such as Bielliptic Hohmann, Phasing, Chase, Plane change and other maneuvers around a parent body.
+- Orbital maneuvers such as Chase, Plane change and other maneuvers around a parent body.
 - Lunar trajectories using coplanar patched conics and numerical integration techniques.
 - Interplanetary trajectories which includes implementation of sphere of influence, optimal planetary departures, sensitivity analysis, interplanetary Hohmann transfers, Non-Hohmann interplanetary trajectories and Rendezvous opportunities.
 - Extended orbital pertubations such as Atomospheric drag, solar radiation pressure, lunar gravity, solar gravity etc.
