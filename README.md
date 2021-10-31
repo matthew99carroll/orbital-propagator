@@ -21,6 +21,7 @@ Contains custom classes for vector, matrix and other data structures used in com
 
 ### Physics
 Contains some basic rigidbody dynamics and all of the code for determining the oribtal elements and state vectors of a satellite.
+Inside of physics you will also find a folder containing all of the orbit maneuvers such as Hohmann transfer, Bielliptic Hohmann transfer, phasing maneuvers etc.
 
 ## Future Additions
 I hope to add the following when I have spare time:
