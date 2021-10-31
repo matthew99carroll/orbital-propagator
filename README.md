@@ -4,8 +4,6 @@ The following is a program written in C# to interface with Unity 3D for visualis
 ## How it works
 The True Anomaly is calculated by first calculating the Mean Anomaly, and then using this to calculate the Eccentric Anomaly. The equation for Eccentric Anomaly is implicit and the Eccentric Anomaly term appears twice, thus it must be numerically calculated. In this case I used a basic Newton's method approach to calculate this. From here the True Anomaly is calculated, which is in turn used to calculate a state vector in the Perifocal frame of reference, and using a transformation matrix, this state vector is taken into the Geocentric Equatorial frame of reference. The J2 pertubation is taken into account to calculate the time varying longitude of ascending node and argument of periapsis with time.
 
-Basic Hohmann transfers have also been implemented, and given a final orbit, satellite mass and specific impulse of the satellite's fuel, will return the required delta V and expended mass.
-
 ## Where to find the code
 All code can be found within the Assets/Scripts folders.
 
@@ -21,10 +19,11 @@ Contains custom classes for vector, matrix and other data structures used in com
 
 ### Physics
 Contains some basic rigidbody dynamics and all of the code for determining the oribtal elements and state vectors of a satellite.
+Inside of physics you will also find a folder containing all of the orbit maneuvers such as Hohmann transfer, Bielliptic Hohmann transfer, phasing maneuvers etc.
 
 ## Future Additions
 I hope to add the following when I have spare time:
-- Orbital maneuvers such as Bielliptic Hohmann, Phasing, Chase, Plane change and other maneuvers around a parent body.
+- Orbital maneuvers such as Chase, Plane change and other maneuvers around a parent body.
 - Lunar trajectories using coplanar patched conics and numerical integration techniques.
 - Interplanetary trajectories which includes implementation of sphere of influence, optimal planetary departures, sensitivity analysis, interplanetary Hohmann transfers, Non-Hohmann interplanetary trajectories and Rendezvous opportunities.
 - Extended orbital pertubations such as Atomospheric drag, solar radiation pressure, lunar gravity, solar gravity etc.
