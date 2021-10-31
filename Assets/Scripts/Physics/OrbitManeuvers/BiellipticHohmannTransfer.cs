@@ -30,12 +30,12 @@ namespace Physics.OrbitManeuvers
 
             _deltaVOrbitOnePointA = System.Math.Sqrt(Constants.GRAVITATIONAL_PARAMETER / _radiusA);
 
-            _angularMomentumOrbitTwo = 2 * System.Math.Sqrt(2 * Constants.GRAVITATIONAL_PARAMETER) * System.Math.Sqrt((_radiusA * _radiusB) / (_radiusA + _radiusB));
+            _angularMomentumOrbitTwo = System.Math.Sqrt(2 * Constants.GRAVITATIONAL_PARAMETER) * System.Math.Sqrt((_radiusA * _radiusB) / (_radiusA + _radiusB));
 
             _deltaVOrbitTwoPointA = _angularMomentumOrbitTwo / _radiusA;
             _deltaVOrbitTwoPointB = _angularMomentumOrbitTwo / _radiusB;
 
-            _angularMomentumOrbitThree = 2 * System.Math.Sqrt(2 * Constants.GRAVITATIONAL_PARAMETER) * System.Math.Sqrt((_radiusC * _radiusB) / (_radiusC + _radiusB));
+            _angularMomentumOrbitThree = System.Math.Sqrt(2 * Constants.GRAVITATIONAL_PARAMETER) * System.Math.Sqrt((_radiusC * _radiusB) / (_radiusC + _radiusB));
 
             _deltaVOrbitThreePointB = _angularMomentumOrbitThree / _radiusB;
             _deltaVOrbitThreePointC = _angularMomentumOrbitThree / _radiusC;
@@ -55,6 +55,9 @@ namespace Physics.OrbitManeuvers
             _timeOfFlight = (1.0 / 2.0) * ((2 * System.Math.PI/(System.Math.Sqrt(Constants.GRAVITATIONAL_PARAMETER))) * System.Math.Pow(_semiMajorAxisOrbitTwo, 3/2) 
                             + (2 * System.Math.PI/(System.Math.Sqrt(Constants.GRAVITATIONAL_PARAMETER))) * System.Math.Pow(_semiMajorAxisOrbitThree, 3/2));
 
+            orbitSpec.Apoapsis = _radiusD - Constants.RADIUS_EARTH;
+            orbitSpec.Periapsis = _radiusC - Constants.RADIUS_EARTH;
+            
             return new ManeuverRequirements(_deltaV, _propellantMassExpended, _timeOfFlight);
         }
     }
