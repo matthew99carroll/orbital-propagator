@@ -4,11 +4,13 @@
     {
         public double RequiredDeltaV;
         public double ExpendedPropellantMass;
+        public double TimeOfFlight;
 
-        public ManeuverRequirements(double requiredDeltaV, double expendedPropellantMass)
+        public ManeuverRequirements(double requiredDeltaV, double expendedPropellantMass, double timeOfFlight)
         {
             RequiredDeltaV = requiredDeltaV;
             ExpendedPropellantMass = expendedPropellantMass;
+            TimeOfFlight = timeOfFlight;
         }
     }
 }

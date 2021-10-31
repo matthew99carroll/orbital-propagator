@@ -34,7 +34,7 @@ public class Simulation : MonoBehaviour
             ArgumentOfPeriapsisSatelliteOne * (System.Math.PI/180),
             0,
             0);
-        var satelliteOne = new OrbitingBody("Deez 1", 100, orbitSpecSatelliteOne);
+        var satelliteOne = new OrbitingBody("Satellite A", 100, orbitSpecSatelliteOne);
         _orbitingBodies.Add(satelliteOne);
 
         var orbitSpecSatelliteTwo = new OrbitSpec(ApoapsisSatelliteTwo, PeriapsisSatelliteTwo,
@@ -43,7 +43,7 @@ public class Simulation : MonoBehaviour
             ArgumentOfPeriapsisSatelliteTwo * (System.Math.PI/180),
             0,
             0);
-        var satelliteTwo = new OrbitingBody("Deez 2", 100, orbitSpecSatelliteTwo);
+        var satelliteTwo = new OrbitingBody("Satellite B", 100, orbitSpecSatelliteTwo);
         _orbitingBodies.Add(satelliteTwo);
 
         InitVisualisation();
@@ -61,12 +61,11 @@ public class Simulation : MonoBehaviour
 
     private void Update()
     {
-
         if (Time.time > _prevTime + 0.2f)
         {
             foreach (var orbitingBody in _orbitingBodies)
             {
-                if (orbitingBody.Name == "Deez 1")
+                if (orbitingBody.Name == "Satellite A")
                 {
                     orbitingBody.OrbitSpec.Apoapsis = ApoapsisSatelliteOne;
                     orbitingBody.OrbitSpec.Periapsis = PeriapsisSatelliteOne;
@@ -75,7 +74,7 @@ public class Simulation : MonoBehaviour
                     orbitingBody.OrbitSpec.ArgumentOfPeriapsis = ArgumentOfPeriapsisSatelliteOne * (System.Math.PI/180);
                 }
                 
-                if (orbitingBody.Name == "Deez 2")
+                if (orbitingBody.Name == "Satellite B")
                 {
                     orbitingBody.OrbitSpec.Apoapsis = ApoapsisSatelliteTwo;
                     orbitingBody.OrbitSpec.Periapsis = PeriapsisSatelliteTwo;
