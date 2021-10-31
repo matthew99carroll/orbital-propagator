@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using static System.Math;
 
 namespace Physics.OrbitManeuvers
 {
@@ -52,14 +53,14 @@ namespace Physics.OrbitManeuvers
 
             _deltaVPointB = _velocityOrbitThreePointB - _velocityOrbitTwoPointB;
 
-            _deltaV = System.Math.Abs(_deltaVPointA) + System.Math.Abs(_deltaVPointB);
+            _deltaV = Abs(_deltaVPointA) + Abs(_deltaVPointB);
 
-            _propellantMassExpended = (1 - System.Math.Exp(-_deltaV / (propellantIsp * Constants.EARTH_GRAVITY_0))) *
+            _propellantMassExpended = (1 - Exp(-_deltaV / (propellantIsp * Constants.EARTH_GRAVITY_0))) *
                                          orbitalBodyMass;
 
             _finalSemiMajorAxis = (_periapsisOrbitOne + _apoapsisFinal) / 2.0;
 
-            _timeOfFlight = (1.0 / 2.0) * ((2 * System.Math.PI/(System.Math.Sqrt(Constants.GRAVITATIONAL_PARAMETER))) * System.Math.Pow(_finalSemiMajorAxis, 3/2));
+            _timeOfFlight = (1.0 / 2.0) * ((2 * PI/(Sqrt(Constants.GRAVITATIONAL_PARAMETER))) * Pow(_finalSemiMajorAxis, 3/2));
             
             return new ManeuverRequirements(_deltaV, _propellantMassExpended, _timeOfFlight);
         }

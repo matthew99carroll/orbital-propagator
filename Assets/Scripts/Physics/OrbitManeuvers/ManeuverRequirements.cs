@@ -12,5 +12,11 @@
             ExpendedPropellantMass = expendedPropellantMass;
             TimeOfFlight = timeOfFlight;
         }
+        
+        public ManeuverRequirements(double requiredDeltaV, double expendedPropellantMass)
+        {
+            RequiredDeltaV = requiredDeltaV;
+            ExpendedPropellantMass = expendedPropellantMass;
+        }
     }
 }

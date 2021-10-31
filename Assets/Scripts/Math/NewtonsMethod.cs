@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using static System.Math;
 
 namespace Math
 {
@@ -15,7 +16,7 @@ namespace Math
             {
                 previousGuess = currentGuess;
                 currentGuess = previousGuess - (function(previousGuess) / derivative(previousGuess));
-                currentError = System.Math.Abs(currentGuess - previousGuess);
+                currentError = Abs(currentGuess - previousGuess);
                 i++;
             }
             if (i >= maxIterations)

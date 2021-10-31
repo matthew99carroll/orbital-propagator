@@ -1,4 +1,5 @@
 using UnityEngine;
+using static System.Math;
 
 namespace Physics.OrbitManeuvers
 {
@@ -32,20 +33,20 @@ namespace Physics.OrbitManeuvers
             _periodOrbitOne = KeplerianSolver.CalculateOrbitalPeriod(keplerianOrbitalElements);
 
             _eccentricAnomalyB =
-                2 * System.Math.Atan(
-                    System.Math.Sqrt((1 - keplerianOrbitalElements.Eccentricity) /
+                2 * Atan(
+                    Sqrt((1 - keplerianOrbitalElements.Eccentricity) /
                                      (1 + keplerianOrbitalElements.Eccentricity)) *
-                    System.Math.Tan(trueAnomalyAToB / 2));
+                    Tan(trueAnomalyAToB / 2));
 
-            _timeOfFlightAToB = _periodOrbitOne / (2 * System.Math.PI) *
+            _timeOfFlightAToB = _periodOrbitOne / (2 * PI) *
                                 (_eccentricAnomalyB - keplerianOrbitalElements.Eccentricity *
-                                    System.Math.Sin(_eccentricAnomalyB));
+                                    Sin(_eccentricAnomalyB));
 
             _periodOrbitTwo = -_periodOrbitOne - (_timeOfFlightAToB / numberOfRevolutions);
 
             _semiMajorAxisOrbitTwo =
-                System.Math.Pow(
-                    (System.Math.Sqrt(Constants.GRAVITATIONAL_PARAMETER) * _periodOrbitTwo / (2 * System.Math.PI)),
+                Pow(
+                    (Sqrt(Constants.GRAVITATIONAL_PARAMETER) * _periodOrbitTwo / (2 * PI)),
                     (2.0 / 3.0));
 
             _orbitTwoApoapsis = (2 * _semiMajorAxisOrbitTwo) - _orbitOnePeriapsis;
@@ -62,9 +63,9 @@ namespace Physics.OrbitManeuvers
             _deltaVPhasingStart = _deltaVOrbitTwoPointA - _deltaVOrbitOnePointA;
             _deltaVPhasingEnd = _deltaVOrbitOnePointA - _deltaVOrbitTwoPointA;
 
-            _deltaV = System.Math.Abs(_deltaVPhasingStart) + System.Math.Abs(_deltaVPhasingEnd);
+            _deltaV = Abs(_deltaVPhasingStart) + Abs(_deltaVPhasingEnd);
             
-            _propellantMassExpended = (1 - System.Math.Exp(-_deltaV / (propellantIsp * Constants.EARTH_GRAVITY_0))) *
+            _propellantMassExpended = (1 - Exp(-_deltaV / (propellantIsp * Constants.EARTH_GRAVITY_0))) *
                                       orbitalBodyMass;
             
             return new ManeuverRequirements(_deltaV, _propellantMassExpended, _timeOfFlightAToB);

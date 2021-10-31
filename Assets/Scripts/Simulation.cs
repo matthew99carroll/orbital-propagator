@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Physics;
 using UnityEngine;
+using static System.Math;
 
 public class Simulation : MonoBehaviour
 {
@@ -29,18 +30,18 @@ public class Simulation : MonoBehaviour
     private void Awake()
     {
         var orbitSpecSatelliteOne = new OrbitSpec(ApoapsisSatelliteOne, PeriapsisSatelliteOne,
-            InclinationSatelliteOne * (System.Math.PI/180),
-            LongitudeAscendingNodeSatelliteOne * (System.Math.PI/180),
-            ArgumentOfPeriapsisSatelliteOne * (System.Math.PI/180),
+            InclinationSatelliteOne * (PI/180),
+            LongitudeAscendingNodeSatelliteOne * (PI/180),
+            ArgumentOfPeriapsisSatelliteOne * (PI/180),
             0,
             0);
         var satelliteOne = new OrbitingBody("Satellite A", 100, orbitSpecSatelliteOne);
         _orbitingBodies.Add(satelliteOne);
 
         var orbitSpecSatelliteTwo = new OrbitSpec(ApoapsisSatelliteTwo, PeriapsisSatelliteTwo,
-            InclinationSatelliteTwo * (System.Math.PI/180),
-            LongitudeAscendingNodeSatelliteTwo * (System.Math.PI/180),
-            ArgumentOfPeriapsisSatelliteTwo * (System.Math.PI/180),
+            InclinationSatelliteTwo * (PI/180),
+            LongitudeAscendingNodeSatelliteTwo * (PI/180),
+            ArgumentOfPeriapsisSatelliteTwo * (PI/180),
             0,
             0);
         var satelliteTwo = new OrbitingBody("Satellite B", 100, orbitSpecSatelliteTwo);
@@ -69,18 +70,18 @@ public class Simulation : MonoBehaviour
                 {
                     orbitingBody.OrbitSpec.Apoapsis = ApoapsisSatelliteOne;
                     orbitingBody.OrbitSpec.Periapsis = PeriapsisSatelliteOne;
-                    orbitingBody.OrbitSpec.Inclination = InclinationSatelliteOne * (System.Math.PI/180);
-                    orbitingBody.OrbitSpec.LongitudeAscendingNode = LongitudeAscendingNodeSatelliteOne * (System.Math.PI/180);
-                    orbitingBody.OrbitSpec.ArgumentOfPeriapsis = ArgumentOfPeriapsisSatelliteOne * (System.Math.PI/180);
+                    orbitingBody.OrbitSpec.Inclination = InclinationSatelliteOne * (PI/180);
+                    orbitingBody.OrbitSpec.LongitudeAscendingNode = LongitudeAscendingNodeSatelliteOne * (PI/180);
+                    orbitingBody.OrbitSpec.ArgumentOfPeriapsis = ArgumentOfPeriapsisSatelliteOne * (PI/180);
                 }
                 
                 if (orbitingBody.Name == "Satellite B")
                 {
                     orbitingBody.OrbitSpec.Apoapsis = ApoapsisSatelliteTwo;
                     orbitingBody.OrbitSpec.Periapsis = PeriapsisSatelliteTwo;
-                    orbitingBody.OrbitSpec.Inclination = InclinationSatelliteTwo * (System.Math.PI/180);
-                    orbitingBody.OrbitSpec.LongitudeAscendingNode = LongitudeAscendingNodeSatelliteTwo * (System.Math.PI/180);
-                    orbitingBody.OrbitSpec.ArgumentOfPeriapsis = ArgumentOfPeriapsisSatelliteTwo * (System.Math.PI/180);
+                    orbitingBody.OrbitSpec.Inclination = InclinationSatelliteTwo * (PI/180);
+                    orbitingBody.OrbitSpec.LongitudeAscendingNode = LongitudeAscendingNodeSatelliteTwo * (PI/180);
+                    orbitingBody.OrbitSpec.ArgumentOfPeriapsis = ArgumentOfPeriapsisSatelliteTwo * (PI/180);
                 }
             }
             
