@@ -23,7 +23,7 @@ namespace Physics
         public static double CalculateAngularMomentum(OrbitSpec orbitSpec, double eccentricity)
         {
             return Sqrt((orbitSpec.Periapsis + Constants.RADIUS_EARTH) * Constants.GRAVITATIONAL_PARAMETER *
-                                    (1 + eccentricity * Cos(orbitSpec.InitialMeanLongitude)));
+                                    (1 + eccentricity * Cos(orbitSpec.InitialTrueAnomaly)));
         }
 
         public static double CalculateAngularMomentum(OrbitSpec orbitSpec)

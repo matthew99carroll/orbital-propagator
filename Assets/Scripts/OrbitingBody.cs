@@ -36,7 +36,7 @@ public class OrbitingBody : IBody
         AngularMomentum = KeplerianSolver.CalculateAngularMomentum(OrbitSpec, OrbitalElements.Eccentricity);
         OrbitalPeriod = KeplerianSolver.CalculateOrbitalPeriod(OrbitalElements);
         MeanAnomaly = KeplerianSolver.CalculateMeanAnomaly(OrbitalElements, OrbitSpec.InitialTime,
-            OrbitSpec.InitialTime, OrbitSpec.InitialMeanLongitude);
+            OrbitSpec.InitialTime, OrbitSpec.InitialTrueAnomaly);
     }
 
     public void ComputeNextPosition(double currentTime)
@@ -44,7 +44,7 @@ public class OrbitingBody : IBody
         OrbitalElements = KeplerianSolver.CalculateKeplerianOrbitalElements(OrbitSpec);
         
         MeanAnomaly = KeplerianSolver.CalculateMeanAnomaly(OrbitalElements, currentTime, OrbitSpec.InitialTime,
-            OrbitSpec.InitialMeanLongitude);
+            OrbitSpec.InitialTrueAnomaly);
         
         var (solution, errorMessage) = KeplerianSolver.CalculateEccentricAnomaly(MeanAnomaly, OrbitalElements.Eccentricity);
         if (errorMessage != null)

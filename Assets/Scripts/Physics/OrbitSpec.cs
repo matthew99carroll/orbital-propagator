@@ -5,7 +5,7 @@
         public double Apoapsis;
         public double Periapsis;
         public double InitialTime;
-        public double InitialMeanLongitude;
+        public double InitialTrueAnomaly;
 
         // 0 - 360
         public double Inclination;
@@ -17,7 +17,7 @@
         public double ArgumentOfPeriapsis;
 
         public OrbitSpec(double apoapsis, double periapsis, double inclination, double longitudeOfAscendingNode,
-            double argumentOfPeriapsis, double initialTime, double initialMeanLongitude)
+            double argumentOfPeriapsis, double initialTime, double initialTrueAnomaly)
         {
             Apoapsis = apoapsis;
             Periapsis = periapsis;
@@ -25,7 +25,7 @@
             LongitudeAscendingNode = longitudeOfAscendingNode;
             ArgumentOfPeriapsis = argumentOfPeriapsis;
             InitialTime = initialTime;
-            InitialMeanLongitude = initialMeanLongitude;
+            InitialTrueAnomaly = initialTrueAnomaly;
         }
     }
 }
