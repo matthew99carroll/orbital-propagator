@@ -1,4 +1,7 @@
-﻿namespace Physics.OrbitManeuvers
+﻿using UnityEditor;
+using static System.Math;
+
+namespace Physics.OrbitManeuvers
 {
     public static class RotateApseLine
     {
@@ -8,34 +11,79 @@
         private static double _a, _b, _c;
         private static double _phi;
         private static double _trueAnomalyOrbitIntersectionRootA, _trueAnomalyOrbitIntersectionRootB;
-        private static double _radiusOrbitIntersection;
+        private static double _radiusOrbitIntersectionA, _radiusOrbitIntersectionB;
+        private static double _velocityTransverseIntersectionAOrbitOne, _velocityRadialIntersectionAOrbitOne;
+        private static double _flightPathAngleIntersectionAOrbitOne;
+        private static double _velocityOrbitOne;
+        private static double _velocityTransverseIntersectionAOrbitTwo, _velocityRadialIntersectionAOrbitTwo;
+        private static double _flightPathAngleIntersectionAOrbitTwo;
+        private static double _velocityOrbitTwo;
+        private static double _deltaV;
+        private static double _propellantMassExpended;
         
         public static ManeuverRequirements CalculateApseLineRotation(KeplerianOrbitalElements keplerianOrbitalElements,
             OrbitSpec orbitSpec,
             double finalPeriapsis,
             double finalApoapsis,
             double trueAnomalyA,
-            double trueAnomalyB)
+            double trueAnomalyB,
+            double orbitalBodyMass,
+            double propellantIsp)
         {
             _eccentricityOrbitOne = keplerianOrbitalElements.Eccentricity;
+            
+            _angularMomentumOrbitOne = KeplerianSolver.CalculateAngularMomentum(orbitSpec, _eccentricityOrbitOne);
 
             orbitSpec.Periapsis = finalPeriapsis;
             orbitSpec.Apoapsis = finalApoapsis;
 
             _eccentricityOrbitTwo = KeplerianSolver.CalculateEccentricity(orbitSpec);
+            _angularMomentumOrbitTwo = KeplerianSolver.CalculateAngularMomentum(orbitSpec, _eccentricityOrbitTwo);
+
+            _apseLineRotation = trueAnomalyB - trueAnomalyA;
+
+
+            _a = (_eccentricityOrbitOne * Pow(_angularMomentumOrbitTwo, 2)) -
+                 (_eccentricityOrbitTwo * Pow(_angularMomentumOrbitOne, 2) * Cos(_apseLineRotation));
+
+            _b = -_eccentricityOrbitTwo * Pow(_eccentricityOrbitOne, 2) * Sin(_apseLineRotation);
+
+            _c = Pow(_angularMomentumOrbitOne, 2) - Pow(_angularMomentumOrbitTwo, 2);
+
+            _phi = Atan(_b / _a);
             
-            /* 1. Calculate angular momentum for orbit one and two
-               2. Calculate apse line rotation = trueAnomalyA - trueAnomalyB
-               3. Calculate a, b, c to plug into equation for the roots, which gives true anomaly at intersections I, J
-               4. Calculate radius at intersection I or J
-               5. Calculate the transverse and radial velocity and flight path angle in orbit 1 at intersection I
-               6. Calculate the speed (magnitude) of the catellite in orbit 1 from the radial and transverse components
-               7. Calculate the transverse and radial velocity and flight path angle in orbit 2 at intersection I
-               8. Calculate the speed (magnitude) of the satellite in orbit 2 from the radial and transverse components
-               9. Calculate delta V which is a ftn of velocity in orbit 1 and 2 and flight path in orbit 1 and 2
-               10. Calculate mass of propellant expended
-               11. Return a new maneuver requirement
-             */
+            _trueAnomalyOrbitIntersectionRootA = _phi + Acos((_c / _a) * Cos(_phi));
+            _trueAnomalyOrbitIntersectionRootB = _phi - Acos((_c / _a) * Cos(_phi));
+
+            _radiusOrbitIntersectionA = Pow(_angularMomentumOrbitOne, 2) / (Constants.GRAVITATIONAL_PARAMETER) *
+                                       (1.0 / (1 + _eccentricityOrbitOne * Cos(_trueAnomalyOrbitIntersectionRootA)));
+            _radiusOrbitIntersectionB = Pow(_angularMomentumOrbitOne, 2) / (Constants.GRAVITATIONAL_PARAMETER) *
+                                       (1.0 / (1 + _eccentricityOrbitOne * Cos(_trueAnomalyOrbitIntersectionRootB)));
+
+            _velocityTransverseIntersectionAOrbitOne = _angularMomentumOrbitOne / _radiusOrbitIntersectionA;
+            _velocityRadialIntersectionAOrbitOne = (Constants.GRAVITATIONAL_PARAMETER / _angularMomentumOrbitOne) *
+                                                   _eccentricityOrbitOne * Sin(_trueAnomalyOrbitIntersectionRootA);
+            _flightPathAngleIntersectionAOrbitOne =
+                Atan(_velocityRadialIntersectionAOrbitOne / _velocityTransverseIntersectionAOrbitOne);
+            _velocityOrbitOne = Sqrt(Pow(_velocityRadialIntersectionAOrbitOne, 2) +
+                                     Pow(_velocityTransverseIntersectionAOrbitOne, 2));
+            
+            _velocityTransverseIntersectionAOrbitTwo = _angularMomentumOrbitTwo / _radiusOrbitIntersectionA;
+            _velocityRadialIntersectionAOrbitTwo = (Constants.GRAVITATIONAL_PARAMETER / _angularMomentumOrbitTwo) *
+                                                   _eccentricityOrbitTwo * Sin(_trueAnomalyOrbitIntersectionRootA - _apseLineRotation);
+            _flightPathAngleIntersectionAOrbitOne =
+                Atan(_velocityRadialIntersectionAOrbitTwo / _velocityTransverseIntersectionAOrbitTwo);
+            _velocityOrbitTwo = Sqrt(Pow(_velocityRadialIntersectionAOrbitTwo, 2) +
+                                     Pow(_velocityTransverseIntersectionAOrbitTwo, 2));
+
+            _deltaV = Sqrt(Pow(_velocityOrbitOne, 2) + Pow(_velocityOrbitTwo, 2) - 2 * _velocityOrbitOne *
+                _velocityOrbitTwo *
+                Cos(_flightPathAngleIntersectionAOrbitTwo - _flightPathAngleIntersectionAOrbitOne));
+            
+            _propellantMassExpended = (1 - Exp(-_deltaV / (propellantIsp * Constants.EARTH_GRAVITY_0))) *
+                                      orbitalBodyMass;
+            
+            return new ManeuverRequirements(_deltaV, _propellantMassExpended);
         }
     }
 }
