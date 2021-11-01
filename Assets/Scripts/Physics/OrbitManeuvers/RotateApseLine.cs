@@ -20,8 +20,9 @@ namespace Physics.OrbitManeuvers
         private static double _velocityOrbitTwo;
         private static double _deltaV;
         private static double _propellantMassExpended;
+        private static double _angleToLocalHorizon;
         
-        public static ManeuverRequirements CalculateApseLineRotation(KeplerianOrbitalElements keplerianOrbitalElements,
+        public static ApseRotationRequirements CalculateApseLineRotation(KeplerianOrbitalElements keplerianOrbitalElements,
             OrbitSpec orbitSpec,
             double finalPeriapsis,
             double finalApoapsis,
@@ -82,8 +83,12 @@ namespace Physics.OrbitManeuvers
             
             _propellantMassExpended = (1 - Exp(-_deltaV / (propellantIsp * Constants.EARTH_GRAVITY_0))) *
                                       orbitalBodyMass;
-            
-            return new ManeuverRequirements(_deltaV, _propellantMassExpended);
+
+            _angleToLocalHorizon = Atan((_velocityRadialIntersectionAOrbitTwo - _velocityRadialIntersectionAOrbitOne) /
+                                        (_velocityTransverseIntersectionAOrbitTwo -
+                                         _velocityTransverseIntersectionAOrbitOne));
+
+            return new ApseRotationRequirements(_deltaV, _propellantMassExpended, _angleToLocalHorizon);
         }
     }
 }
