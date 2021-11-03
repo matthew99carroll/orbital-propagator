@@ -4,6 +4,9 @@ using static System.Math;
 
 namespace Physics.OrbitManeuvers
 {
+    /*
+     * Note this rendezvous maneuver is only valid when the target orbit is circular or near circular!
+     */
     public static class TwoImpulseRendezvousManeuver
     {
         private static Vector3D _directionCosineMatrixGefToChaserI,
