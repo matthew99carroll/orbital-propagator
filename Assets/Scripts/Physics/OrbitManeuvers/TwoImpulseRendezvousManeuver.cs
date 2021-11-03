@@ -20,7 +20,7 @@ namespace Physics.OrbitManeuvers
         private static Vector3D _initRelVelocityTargetsRefFramePlus;
         private static Vector3D _finalRelVelocityTargetsRefFrameMinus;
 
-        private static CloshessyWiltshireMatrices _matrices;
+        private static ClohessyWiltshireMatrices _matrices;
         
         private static Vector3D _initialDeltaV, _finalDeltaV;
         private static double _deltaV;
@@ -93,15 +93,15 @@ namespace Physics.OrbitManeuvers
             _initRelVelocityTargetsRefFrameMinus =
                 MatrixVectorProduct3D(_directionCosineMatrix, _relVelocityChaserToTargetGef);
             
-            // Initialise empty Closhessy-Wiltshire matrix datatype
-            _matrices = new CloshessyWiltshireMatrices();
+            // Initialise empty Clohessy-Wiltshire matrix datatype
+            _matrices = new ClohessyWiltshireMatrices();
             
-            // Closhessy-Wiltshire Matrix Phi rr
+            // Clohessy-Wiltshire Matrix Phi rr
             _matrices.phirr = new Matrix3x3((4 - 3 * Cos(_meanMotionTarget * rendezvousTime)), 0.0, 0.0,
                 (6 * (Sin(_meanMotionTarget * rendezvousTime) - _meanMotionTarget * rendezvousTime)), 1.0, 0.0,
                 0.0, 0.0, Cos(_meanMotionTarget * rendezvousTime));
             
-            // Closhessy-Wiltshire Matrix Phi rv
+            // Clohessy-Wiltshire Matrix Phi rv
             _matrices.phirv = new Matrix3x3((Sin(_meanMotionTarget * rendezvousTime) / _meanMotionTarget),
                 ((2 * (1 - Cos(_meanMotionTarget * rendezvousTime))) / _meanMotionTarget), 0.0,
                 ((2 * (Cos(_meanMotionTarget * rendezvousTime) - 1)) / _meanMotionTarget),
@@ -109,12 +109,12 @@ namespace Physics.OrbitManeuvers
                  _meanMotionTarget), 0.0,
                 0.0, 0.0, Sin(_meanMotionTarget * rendezvousTime) / _meanMotionTarget);
             
-            // Closhessy-Wiltshire Matrix Phi vr
+            // Clohessy-Wiltshire Matrix Phi vr
             _matrices.phivr = new Matrix3x3((3 * _meanMotionTarget * Sin(_meanMotionTarget * rendezvousTime)), 0.0, 0.0,
                 (6 * _meanMotionTarget * (Cos(_meanMotionTarget * rendezvousTime) - 1.0)), 0.0, 0.0,
                 0.0, 0.0, -_meanMotionTarget * Sin(_meanMotionTarget * rendezvousTime));
             
-            // Closhessy-Wiltshire Matrix Phi vv
+            // Clohessy-Wiltshire Matrix Phi vv
             _matrices.phivv = new Matrix3x3(Cos(_meanMotionTarget * rendezvousTime),
                 2 * Sin(_meanMotionTarget * rendezvousTime), 0.0,
                 -2 * Sin(_meanMotionTarget * rendezvousTime), 4 * Cos(_meanMotionTarget * rendezvousTime) - 3, 0.0,

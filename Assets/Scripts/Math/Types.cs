@@ -137,14 +137,14 @@ namespace Math
             }
         }
 
-        public class CloshessyWiltshireMatrices
+        public class ClohessyWiltshireMatrices
         {
             public Matrix3x3 phirr;
             public Matrix3x3 phirv;
             public Matrix3x3 phivr;
             public Matrix3x3 phivv;
 
-            public CloshessyWiltshireMatrices(Matrix3x3 _phirr, Matrix3x3 _phirv, Matrix3x3 _phivr, Matrix3x3 _phivv)
+            public ClohessyWiltshireMatrices(Matrix3x3 _phirr, Matrix3x3 _phirv, Matrix3x3 _phivr, Matrix3x3 _phivv)
             {
                 phirr = _phirr;
                 phirv = _phirv;
@@ -152,7 +152,7 @@ namespace Math
                 phivv = _phivv;
             }
 
-            public CloshessyWiltshireMatrices()
+            public ClohessyWiltshireMatrices()
             {
                 phirr = new Matrix3x3();
                 phirv = new Matrix3x3();
