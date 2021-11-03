@@ -23,7 +23,7 @@ Inside of physics you will also find a folder containing all of the orbit maneuv
 
 ## Future Additions
 I hope to add the following when I have spare time:
-- Orbital maneuvers such as Chase, Plane change and other maneuvers around a parent body.
+- Add Non-Impulsive Orbital maneuvers as currently I only consider Impulsive maneuvers.
 - Lunar trajectories using coplanar patched conics and numerical integration techniques.
 - Interplanetary trajectories which includes implementation of sphere of influence, optimal planetary departures, sensitivity analysis, interplanetary Hohmann transfers, Non-Hohmann interplanetary trajectories and Rendezvous opportunities.
 - Extended orbital pertubations such as Atomospheric drag, solar radiation pressure, lunar gravity, solar gravity etc.
