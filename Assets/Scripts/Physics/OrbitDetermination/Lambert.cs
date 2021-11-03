@@ -32,12 +32,6 @@ namespace Physics.OrbitDetermination
             double timeOfFlight,
             Types.Direction direction)
         {
-            /*
-             * TODO: Write method to calculate Stumpff functions to determine S(z) and C(z).
-             * Which are used for F(z, t), F'(z), y(z). These will be passed into this function to calculate lamberts
-             * velocity vector
-             */
-
             Types.LambertsVelocityVectors velocityVectors = new Types.LambertsVelocityVectors(
                 new Types.Vector3D(0, 0, 0),
                 new Types.Vector3D(0, 0, 0));
